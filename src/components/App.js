@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { COLORS } from '../helpers';
 import Tile from './Tile';
 
-
 const Container = styled.div`
   max-width: 600px;
   box-sizing: border-box;
@@ -18,12 +17,11 @@ const Board = styled.div`
 `;
 
 const Item = styled.div`
-  background:${({ color }) => color};
+  background-color: #fff;
   width: 25%;
   height: 150px;
   border: 1px solid #999;
   box-sizing: border-box;
-  cursor: pointer;
 `
 
 const Play = styled.div`
@@ -60,9 +58,9 @@ class App extends Component {
         <Board>
           {lengthNotDisabled.includes(false) ? board.map((item, index) =>
             item.isDisabled ?
-              <Item key={index} color={'#fff'}></Item> :
+              <Item key={index}></Item> :
               <Tile
-                color={item.isActive ? item.color : '#fafafa'}
+                color={item.isActive ? item.color : '#efefef'}
                 item={item}
                 selected={selected}
                 onAddItem={onAddItem}
