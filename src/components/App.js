@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../helpers';
+import Tile from './Tile';
 
 
 const Container = styled.div`
@@ -25,46 +26,56 @@ const Item = styled.div`
   cursor: pointer;
 `
 
+const Play = styled.div`
+  display: flex;
+  flex: none;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
 class App extends Component {
   componentDidMount() {
     this.props.onGenerateBoard(COLORS);
   }
 
-  addItem(item) {
-    const { selected, onAddItem, onRemoveTiles, onClearSelected } = this.props;
-    const { color } = item;
-
-    if (selected.length < 1) {
-      onAddItem(item);
-    } else {
-      onAddItem(item);
-      setTimeout(() => {
-        onClearSelected()
-        if (selected[0].color === color) {
-          onRemoveTiles(color);
-        }
-      }, 400);
-
-    }
+  playAgain = () => {
+    this.props.onGenerateBoard(COLORS);
   }
 
   render() {
-    const { board } = this.props;
+    const {
+      board,
+      selected,
+      onAddItem,
+      onRemoveTiles,
+      onClearSelected
+    } = this.props;
+    const lengthNotDisabled = board.map(item => !!item.isDisabled && true);
 
     return (
       <Container>
         <h1>Game</h1>
         <Board>
-          {board.length ? board.map((item, index) =>
-            <Item
-              color={item.isActive ? item.color : "#fafafa"}
-              key={index}
-              onClick={() => this.addItem(item)}>
-            </Item>
+          {lengthNotDisabled.includes(false) ? board.map((item, index) =>
+            item.isDisabled ?
+              <Item key={index} color={'#fff'}></Item> :
+              <Tile
+                color={item.isActive ? item.color : '#fafafa'}
+                item={item}
+                selected={selected}
+                onAddItem={onAddItem}
+                onRemoveTiles={onRemoveTiles}
+                onClearSelected={onClearSelected}
+                key={index}>
+              </Tile>
           ) :
-            <div>Победа!</div>}
+            <Play>
+              <div>You won!</div>
+              <button onClick={this.playAgain}>Play again</button>
+            </Play>}
         </Board>
-        <button>Start</button>
       </Container>
     );
   }

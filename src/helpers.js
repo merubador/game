@@ -28,7 +28,6 @@ export const COLORS = [
 export const makeRandom = () => 0.5 - Math.random();
 
 export const generateBoard = (colors) => {
-  console.log(colors);
   const allColors = colors.concat(colors);
   const mixedColors = allColors.sort(makeRandom);
 
@@ -42,3 +41,12 @@ export const checkSelected = (list) => {
 
   return list;
 }
+
+export const disableTiles = (color, board) =>
+  board.map(item => {
+    if (item.color === color) {
+      return { ...item, isDisabled: true }
+    }
+
+    return item;
+  })
