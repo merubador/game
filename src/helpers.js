@@ -34,14 +34,6 @@ export const generateBoard = (colors) => {
   return mixedColors.map((x, i) => ({ ...x, id: i, isActive: false }));
 }
 
-export const checkSelected = (list) => {
-  if (list.length >= 1) {
-    return [];
-  }
-
-  return list;
-}
-
 export const disableTiles = (color, board) =>
   board.map(item => {
     if (item.color === color) {

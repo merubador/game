@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-
 const Scene = styled.div`
   width: 25%;
   height: 150px;
@@ -34,7 +33,6 @@ const Back = styled(Front)`
 `
 
 class Tile extends Component {
-
   addItem = () => {
     const {
       selected,
@@ -60,9 +58,7 @@ class Tile extends Component {
   }
 
   render() {
-    const {
-      color
-    } = this.props;
+    const { color } = this.props;
 
     return (
       <Scene

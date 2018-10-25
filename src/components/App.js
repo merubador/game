@@ -14,6 +14,7 @@ const Container = styled.div`
 const Board = styled.div`
   display: flex;
   flex-wrap: wrap;
+  border: 1px solid #999;
 `;
 
 const Item = styled.div`
@@ -22,15 +23,6 @@ const Item = styled.div`
   height: 150px;
   border: 1px solid #999;
   box-sizing: border-box;
-`
-
-const Play = styled.div`
-  display: flex;
-  flex: none;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 `
 
 class App extends Component {
@@ -54,26 +46,27 @@ class App extends Component {
 
     return (
       <Container>
-        <h1>Game</h1>
-        <Board>
-          {lengthNotDisabled.includes(false) ? board.map((item, index) =>
-            item.isDisabled ?
-              <Item key={index}></Item> :
-              <Tile
-                color={item.isActive ? item.color : '#efefef'}
-                item={item}
-                selected={selected}
-                onAddItem={onAddItem}
-                onRemoveTiles={onRemoveTiles}
-                onClearSelected={onClearSelected}
-                key={index}>
-              </Tile>
-          ) :
-            <Play>
-              <div>You won!</div>
-              <button onClick={this.playAgain}>Play again</button>
-            </Play>}
-        </Board>
+        <h1>Flip tile game</h1>
+        {!!lengthNotDisabled.includes(false) ?
+          <Board>
+            {board.map((item, index) =>
+              item.isDisabled ?
+                <Item key={index}></Item> :
+                <Tile
+                  color={item.isActive ? item.color : '#efefef'}
+                  item={item}
+                  selected={selected}
+                  onAddItem={onAddItem}
+                  onRemoveTiles={onRemoveTiles}
+                  onClearSelected={onClearSelected}
+                  key={index}>
+                </Tile>
+            )}
+          </Board> :
+          <div>
+            <div>You won!</div>
+            <button onClick={this.playAgain}>Play again</button>
+          </div>}
       </Container>
     );
   }
