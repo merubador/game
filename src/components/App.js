@@ -42,14 +42,14 @@ class App extends Component {
       selected,
       onAddItem,
       onRemoveTiles,
-      onClearSelected
+      onClearSelected,
+      disabledTiles
     } = this.props;
-    const lengthNotDisabled = board.map(item => !!item.isDisabled && true);
 
     return (
       <Container>
         <h1>Flip tile game</h1>
-        {!!lengthNotDisabled.includes(false) ?
+        {!!disabledTiles.includes(false) ?
           <Board>
             {board.map((item, index) =>
               item.isDisabled ?

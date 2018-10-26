@@ -20,5 +20,4 @@ export const addItem = payload => ({
 
 export const clearSelected = () => ({
   type: CLEAR_SELECTED,
-  payload: []
 })
