@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { disableTiles } from '../helpers';
 
 const Scene = styled.div`
   width: 25%;
@@ -39,7 +40,8 @@ class Tile extends Component {
       onAddItem,
       onRemoveTiles,
       onClearSelected,
-      item
+      item,
+      board
     } = this.props;
     const { color } = item;
 
@@ -50,7 +52,7 @@ class Tile extends Component {
       setTimeout(() => {
         onClearSelected()
         if (selected[0].color === color) {
-          onRemoveTiles(color);
+          onRemoveTiles(disableTiles(color, board));
         }
       }, 400);
 

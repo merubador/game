@@ -1,13 +1,12 @@
 import { combineReducers } from 'redux';
 import { GENERATE_BOARD, ADD_ITEM, CLEAR_SELECTED, REMOVE_TILES } from './actions';
-import { generateBoard, disableTiles } from './helpers';
 
 function board(state = [], action) {
   switch (action.type) {
     case GENERATE_BOARD:
-      return generateBoard(action.payload);
+      return action.payload;
     case REMOVE_TILES:
-      return disableTiles(action.payload, state);
+      return action.payload;
     default:
       return state;
   }

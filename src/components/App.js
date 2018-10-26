@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { COLORS } from '../helpers';
+import { COLORS, generateBoard } from '../helpers';
 import Tile from './Tile';
 
 const Container = styled.div`
@@ -27,11 +27,13 @@ const Item = styled.div`
 
 class App extends Component {
   componentDidMount() {
-    this.props.onGenerateBoard(COLORS);
+    const { onGenerateBoard, board } = this.props;
+    onGenerateBoard(generateBoard(COLORS, board));
   }
 
   playAgain = () => {
-    this.props.onGenerateBoard(COLORS);
+    const { onGenerateBoard, board } = this.props;
+    onGenerateBoard(generateBoard(COLORS, board));
   }
 
   render() {
@@ -59,6 +61,7 @@ class App extends Component {
                   onAddItem={onAddItem}
                   onRemoveTiles={onRemoveTiles}
                   onClearSelected={onClearSelected}
+                  board={board}
                   key={index}>
                 </Tile>
             )}
