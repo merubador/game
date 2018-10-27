@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { COLORS, generateBoard } from '../helpers';
-import Tile from './Tile';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { COLORS, generateBoard } from "../helpers";
+import Tile from "./Tile";
 
 const Container = styled.div`
   max-width: 600px;
@@ -23,7 +23,7 @@ const Item = styled.div`
   height: 150px;
   border: 1px solid #999;
   box-sizing: border-box;
-`
+`;
 
 class App extends Component {
   componentDidMount() {
@@ -34,7 +34,7 @@ class App extends Component {
   playAgain = () => {
     const { onGenerateBoard, board } = this.props;
     onGenerateBoard(generateBoard(COLORS, board));
-  }
+  };
 
   render() {
     const {
@@ -49,27 +49,32 @@ class App extends Component {
     return (
       <Container>
         <h1>Flip tile game</h1>
-        {!!disabledTiles.includes(false) ?
+        {!!disabledTiles.includes(false) ? (
           <Board>
-            {board.map((item, index) =>
-              item.isDisabled ?
-                <Item key={index}></Item> :
-                <Tile
-                  color={item.isActive ? item.color : '#efefef'}
-                  item={item}
-                  selected={selected}
-                  onAddItem={onAddItem}
-                  onRemoveTiles={onRemoveTiles}
-                  onClearSelected={onClearSelected}
-                  board={board}
-                  key={index}>
-                </Tile>
+            {board.map(
+              (item, index) =>
+                item.isDisabled ? (
+                  <Item key={index} />
+                ) : (
+                  <Tile
+                    color={item.isActive ? item.color : "#efefef"}
+                    item={item}
+                    selected={selected}
+                    onAddItem={onAddItem}
+                    onRemoveTiles={onRemoveTiles}
+                    onClearSelected={onClearSelected}
+                    board={board}
+                    key={index}
+                  />
+                )
             )}
-          </Board> :
+          </Board>
+        ) : (
           <div>
             <div>You won!</div>
             <button onClick={this.playAgain}>Play again</button>
-          </div>}
+          </div>
+        )}
       </Container>
     );
   }

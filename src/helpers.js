@@ -1,3 +1,5 @@
+import * as R from "ramda";
+
 export const COLORS = [
   {
     color: "#0a5adb"
@@ -23,22 +25,22 @@ export const COLORS = [
   {
     color: "#db950a"
   }
-]
+];
 
 export const makeRandom = () => 0.5 - Math.random();
 
-export const generateBoard = (colors) => {
-  const allColors = colors.concat(colors);
-  const mixedColors = allColors.sort(makeRandom);
-
-  return mixedColors.map((x, i) => ({ ...x, id: i, isActive: false }));
-}
+export const generateBoard = colors =>
+  R.pipe(
+    data => data.concat(data),
+    allColors => allColors.sort(makeRandom),
+    mixedColors => mixedColors.map((x, i) => ({ ...x, id: i, isActive: false }))
+  )(colors);
 
 export const disableTiles = (color, board) =>
   board.map(item => {
     if (item.color === color) {
-      return { ...item, isDisabled: true }
+      return { ...item, isDisabled: true };
     }
 
     return item;
-  })
+  });

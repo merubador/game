@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { disableTiles } from '../helpers';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { disableTiles } from "../helpers";
 
 const Scene = styled.div`
   width: 25%;
@@ -9,16 +9,16 @@ const Scene = styled.div`
   box-sizing: border-box;
   cursor: pointer;
   perspective: 600px;
-`
+`;
 
 const Item = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  transition: transform .4s;
+  transition: transform 0.4s;
   transform-style: preserve-3d;
   transform: ${({ flip }) => flip};
-`
+`;
 
 const Front = styled.div`
   position: absolute;
@@ -26,12 +26,12 @@ const Front = styled.div`
   width: 100%;
   backface-visibility: hidden;
   background-color: #efefef;
-`
+`;
 
 const Back = styled(Front)`
-  background:${({ color }) => color};
-  transform: rotateY( 180deg );
-`
+  background: ${({ color }) => color};
+  transform: rotateY(180deg);
+`;
 
 class Tile extends Component {
   addItem = () => {
@@ -49,25 +49,24 @@ class Tile extends Component {
       onAddItem(item);
     } else {
       onAddItem(item);
+
       setTimeout(() => {
-        onClearSelected()
+        onClearSelected();
         if (selected[0].color === color) {
           onRemoveTiles(disableTiles(color, board));
         }
       }, 400);
-
     }
-  }
+  };
 
   render() {
     const { color } = this.props;
 
     return (
-      <Scene
-        onClick={this.addItem}>
-        <Item flip={color !== '#efefef' ? 'rotateY(180deg)' : 'rotateY(0deg)'}>
-          <Front></Front>
-          <Back color={color}></Back>
+      <Scene onClick={this.addItem}>
+        <Item flip={color !== "#efefef" ? "rotateY(180deg)" : "rotateY(0deg)"}>
+          <Front />
+          <Back color={color} />
         </Item>
       </Scene>
     );
